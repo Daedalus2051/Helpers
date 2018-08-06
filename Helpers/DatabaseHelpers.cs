@@ -94,6 +94,34 @@ namespace Helpers
         }
 
         /// <summary>
+        /// Executes a single SQL statement.
+        /// </summary>
+        /// <param name="sqlCommand">The SqlCommand object to be used in the execution.</param>
+        /// <returns>Returns the number of rows affected, or -1 if the execution failed.</returns>
+        public static int ExecuteSql(SqlCommand sqlCommand)
+        {
+            int results = -1;
+            using (sqlCommand.Connection)
+            {
+                sqlCommand.Connection.Open();
+                results = sqlCommand.ExecuteNonQuery();
+            }
+            return results;
+        }
+        /// <summary>
+        /// Executes a single SQL statement.
+        /// </summary>
+        /// <param name="connectionString">Standard SQL connection string.</param>
+        /// <param name="sqlCommand">The SqlCommand object to be used in the execution.</param>
+        /// <returns>Returns the number of rows affected, or -1 if the execution failed.</returns>
+        /// <returns></returns>
+        public static int ExecuteSql(string connectionString, SqlCommand sqlCommand)
+        {
+            sqlCommand.Connection = new SqlConnection(connectionString);
+            return ExecuteSql(sqlCommand);
+        }
+
+        /// <summary>
         /// Runs a SQL Command and returns a DataTable.
         /// </summary>
         /// <param name="sqlCommand">SQL Command to be executed.</param>
