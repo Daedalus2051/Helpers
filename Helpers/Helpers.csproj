@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyHelpers.cs" />
+    <Compile Include="DatabaseHelpers.cs" />
     <Compile Include="DialogHelpers.cs" />
     <Compile Include="FileHelpers.cs" />
     <Compile Include="OperationResult.cs" />
