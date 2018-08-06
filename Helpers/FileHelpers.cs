@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Helpers
 {
+    /// <summary>
+    /// Contains methods related to the reading or manipulation of files and/or folders on a drive.
+    /// </summary>
     public class FileHelpers
     {
         /// <summary>

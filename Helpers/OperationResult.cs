@@ -5,6 +5,9 @@ using System.Runtime.CompilerServices;
 
 namespace Helpers
 {
+    /// <summary>
+    /// Simple class that allows for a boolean result to be set for an operation, along with messages relating to the result.
+    /// </summary>
     public class OperationResult
     {
         private bool _success;

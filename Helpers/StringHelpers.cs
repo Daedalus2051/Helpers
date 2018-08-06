@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Helpers
 {
+    /// <summary>
+    /// Contains methods related to the conversion or manipulation of strings.
+    /// </summary>
     public class StringHelpers
     {
         /// <summary>

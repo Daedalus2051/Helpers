@@ -4,6 +4,9 @@ using System.Reflection;
 
 namespace Helpers
 {
+    /// <summary>
+    /// Contains various methods related to getting information and embeded resources out of the calling or specified assembly.
+    /// </summary>
     public class AssemblyHelpers
     {
         /// <summary>
