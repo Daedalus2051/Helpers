@@ -50,13 +50,30 @@ namespace Helpers
             return Assembly.GetCallingAssembly().GetManifestResourceStream(resourceName);
         }
         /// <summary>
+        /// Gets the embedded resource by name from the calling assembly and returns it as a string.
+        /// </summary>
+        /// <param name="resourceName">Name of the resource being requested.</param>
+        /// <returns>Returns string value of the resource object.</returns>
+        public static string GetResourceString(string resourceName)
+        {
+            string res = "";
+            using (Stream stream = GetResourceStream(resourceName))
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    res = reader.ReadToEnd();
+                }
+            }
+            return res;
+        }
+        /// <summary>
         /// Gets the version information for the calling assembly.
         /// </summary>
         /// <returns></returns>
         public static string GetVersion()
         {
             var assembly = Assembly.GetCallingAssembly().GetName();
-            return $"{assembly.Version.Major}.{assembly.Version.Minor}.{assembly.Version.Revision}.{assembly.Version.MinorRevision}";
+            return $"{assembly.Version.Major}.{assembly.Version.Minor}.{assembly.Version.Build}.{assembly.Version.Revision}";
         }
     }
 }
