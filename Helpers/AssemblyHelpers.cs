@@ -18,6 +18,8 @@ namespace Helpers
         {
             using (var resource = Assembly.GetCallingAssembly().GetManifestResourceStream(resourceName))
             {
+                if (resource == null) return;
+
                 using (var file = new FileStream(fileName, FileMode.Create, FileAccess.Write))
                 {
                     resource.CopyTo(file);
@@ -57,8 +59,13 @@ namespace Helpers
         public static string GetResourceString(string resourceName)
         {
             string res = "";
-            using (Stream stream = GetResourceStream(resourceName))
+            // This may seem like code duplication, but if we reuse the GetResourceStream function
+            // it will fail because the "calling" assembly is no longer original...it's this Helpers assembly
+            // where the resource doesn't exist (and will always return null)
+            using (Stream stream = Assembly.GetCallingAssembly().GetManifestResourceStream(resourceName))
             {
+                if (stream == null) return "";
+
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     res = reader.ReadToEnd();

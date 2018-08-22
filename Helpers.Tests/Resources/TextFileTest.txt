@@ -1,0 +1,3 @@
+﻿This is a file that is used to test
+
+various assembly gathering resources.
