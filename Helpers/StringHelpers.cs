@@ -22,5 +22,27 @@ namespace Helpers
                 output += element + Environment.NewLine;
             return output.TrimEnd(Environment.NewLine.ToCharArray());
         }
+        /// <summary>
+        /// Given a reference string as input, replaces all occurrences of the desired keyword with the given variable replacement.
+        /// </summary>
+        /// <param name="variableName">The keyword to search for and replace with actual data.</param>
+        /// <param name="replacement">The actual data that the variable should be replaced with.</param>
+        /// <param name="input">The string containing the data you wish to replace.</param>
+        public static void ParseVariable(string variableName, string replacement, ref string input)
+        {
+            input = input.Replace(variableName, replacement);
+        }
+        /// <summary>
+        /// Given a reference string as input, replaces all occurrences of the desired keyword with the given variable replacement.
+        /// </summary>
+        /// <param name="variableList">A dictionary of name, value where name is the keyword and value is the variable data.</param>
+        /// <param name="input">The string containing the data you wish to replace.</param>
+        public static void ParseMultipleVariables(Dictionary<string, string> variableList, ref string input)
+        {
+            foreach (KeyValuePair<string, string> variable in variableList)
+            {
+                input = input.Replace(variable.Key, variable.Value);
+            }
+        }
     }
 }
