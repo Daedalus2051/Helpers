@@ -53,7 +53,7 @@ namespace Helpers
         /// Adds a string collection to the message list.
         /// </summary>
         /// <param name="messages">List of strings to be added to the message list collection.</param>
-        public void AddMessageList(List<string> messages)
+        public void AddMessageList(IEnumerable<string> messages)
         {
             _messageList.AddRange(messages);
         }

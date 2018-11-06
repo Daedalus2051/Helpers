@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Helpers
 {
@@ -17,10 +16,24 @@ namespace Helpers
         /// <returns></returns>
         public static string CollectionToString(IEnumerable<string> input)
         {
+            if (input.Count() == 0) return "";
+
             string output = "";
+            string last = input.Last();
+
             foreach (string element in input)
-                output += element + Environment.NewLine;
-            return output.TrimEnd(Environment.NewLine.ToCharArray());
+            {
+                if (element == last)
+                {
+                    output += $"{element}";
+                }
+                else
+                {
+                    output += $"{element}{Environment.NewLine}";
+                }
+            }
+
+            return output;
         }
         /// <summary>
         /// Given a reference string as input, replaces all occurrences of the desired keyword with the given variable replacement.
