@@ -45,6 +45,15 @@ namespace Helpers
         {
             input = input.Replace(variableName, replacement);
         }
+        public static string ParseVariable(string variableName, string replacement, string input)
+        {
+            string output = "";
+
+            ParseVariable(variableName, replacement, ref input);
+            output = input;
+
+            return output;
+        }
         /// <summary>
         /// Given a reference string as input, replaces all occurrences of the desired keyword with the given variable replacement.
         /// </summary>
@@ -56,6 +65,15 @@ namespace Helpers
             {
                 input = input.Replace(variable.Key, variable.Value);
             }
+        }
+        public static string ParseMultipleVariables(Dictionary<string, string> variableList, string input)
+        {
+            string output = "";
+
+            ParseMultipleVariables(variableList, ref input);
+            output = input;
+
+            return output;
         }
     }
 }
