@@ -8,6 +8,7 @@ namespace Helpers
     /// </summary>
     public class DialogHelpers
     {
+        #region Properties
         private string _dialogFilter;
         /// <summary>
         /// Gets or sets the current file name filter string, which determines the choices that appear in the "Save as file type" or "Files of type" box in the dialog box.
@@ -28,6 +29,18 @@ namespace Helpers
             set { _initalDirectory = value; }
         }
 
+        private string _browsePath;
+        /// <summary>
+        /// Gets or sets the selected path of the Folder Browse dialog.
+        /// </summary>
+        public string BrowsePath
+        {
+            get { return _browsePath; }
+            set { _browsePath = value; }
+        }
+        #endregion
+
+        #region Constructors
         /// <summary>
         /// Creates an instance of the class with default values (all files, current directory).
         /// </summary>
@@ -36,6 +49,7 @@ namespace Helpers
             _dialogFilter = "*.*";
             _initalDirectory = Environment.CurrentDirectory;
         }
+
         /// <summary>
         /// Creates an instance of the class using the parameters specified.
         /// </summary>
@@ -46,7 +60,9 @@ namespace Helpers
             _dialogFilter = filter;
             _initalDirectory = initialDir;
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Creates an OpenFile dialog and displays it to the user to choose a file.
         /// </summary>
@@ -94,7 +110,10 @@ namespace Helpers
         public string InvokeFolderBrowseDialog()
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
-            //dialog.RootFolder = Environment.SpecialFolder.MyDocuments;
+            if (System.IO.Directory.Exists(_browsePath))
+            {
+                dialog.SelectedPath = _browsePath;
+            }
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -105,5 +124,6 @@ namespace Helpers
                 return "";
             }
         }
+        #endregion
     }
 }

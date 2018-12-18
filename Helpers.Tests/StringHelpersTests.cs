@@ -76,5 +76,128 @@ namespace Helpers.Tests
             // assert
             Assert.AreEqual(validResult, output);
         }
+
+        [TestMethod]
+        public void ParseCommandLineArgs_VerifyParseNormal()
+        {
+            // arrange
+            var testData = new List<string> {
+                "--command1", "value1",
+                "--command2", "value2",
+                "--command3", "value3"
+            };
+            var commands = new List<string>();
+            var values = new List<string>();
+            foreach(var item in testData)
+            {
+                if (item.Contains("--"))
+                {
+                    commands.Add(item);
+                }
+                else
+                {
+                    values.Add(item);
+                }
+            }
+            
+            // act
+            var output = StringHelpers.ParseCommandLineArgs(testData.ToArray());
+
+            bool expected = true;
+
+            foreach(var command in commands)
+            {
+                if (!output.ContainsKey(command.Replace("--", ""))) expected = false;
+            }
+            foreach(var value in values)
+            {
+                if (!output.ContainsValue(value)) expected = false;
+            }
+
+            // assert
+            Assert.AreEqual(true, expected);
+        }
+
+        [TestMethod]
+        public void ParseCommandLineArgs_VerifySequentialCommands()
+        {
+            // arrange
+            var testData = new List<string> {
+                "--command1", "value1",
+                "--command2", "--sequentialCommand",
+                "--sequentialCommand1", "withValue",
+                "--command3", "--sequentialCommand2"
+            };
+            var commands = new List<string>();
+            var values = new List<string>();
+            foreach (var item in testData)
+            {
+                if (item.Contains("--"))
+                {
+                    commands.Add(item);
+                }
+                else
+                {
+                    values.Add(item);
+                }
+            }
+
+            // act
+            var output = StringHelpers.ParseCommandLineArgs(testData.ToArray());
+
+            bool expected = true;
+
+            foreach (var command in commands)
+            {
+                if (!output.ContainsKey(command.Replace("--", ""))) expected = false;
+            }
+            foreach (var value in values)
+            {
+                if (!output.ContainsValue(value)) expected = false;
+            }
+
+            // assert
+            Assert.AreEqual(true, expected);
+        }
+
+        [TestMethod]
+        public void ParseCommandLineArgs_VerifyAllCommands()
+        {
+            // arrange
+            var testData = new List<string> {
+                "--command1", "--command2", "--sequentialCommand",
+                "--sequentialCommand1", "--command3", "--sequentialCommand2"
+            };
+            var commands = new List<string>();
+            var values = new List<string>();
+            foreach (var item in testData)
+            {
+                if (item.Contains("--"))
+                {
+                    commands.Add(item);
+                }
+                else
+                {
+                    values.Add(item);
+                }
+            }
+
+            // act
+            var output = StringHelpers.ParseCommandLineArgs(testData.ToArray());
+
+            bool expected = true;
+
+            foreach (var command in commands)
+            {
+                if (!output.ContainsKey(command.Replace("--", ""))) expected = false;
+            }
+            foreach (var value in values)
+            {
+                if (!output.ContainsValue(value)) expected = false;
+            }
+
+            // assert
+            Assert.AreEqual(true, expected);
+        }
     }
 }

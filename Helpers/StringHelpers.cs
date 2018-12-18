@@ -75,5 +75,46 @@ namespace Helpers
 
             return output;
         }
+        /// <summary>
+        /// Searches through an array of strings in order to find key value pairs of command line arguments.
+        /// </summary>
+        /// <param name="args">String array of arguments passed from the command line.</param>
+        /// <returns>Returns dictionary of string,string containing the passed command name and value.</returns>
+        public static Dictionary<string, string> ParseCommandLineArgs(string[] args)
+        {
+            Dictionary<string, string> arguments = new Dictionary<string, string>();
+            if (args.Count() < 2) return arguments;
+
+            // Check and/or parse any arguments passed to the executable
+            for (int index = 0; index < args.Length; index++)
+            {
+                int nextIndex = index + 1;
+                if (args[index].Contains("--"))
+                {
+                    string argName = args[index].Replace("--", "");
+
+                    if (nextIndex >= args.Length) nextIndex--;
+
+                    if (args[nextIndex].Contains("--"))
+                    {
+                        // if we have two commands in a row, either someone forgot a value or it's
+                        // an operational command
+                        arguments.Add(argName, "");
+                    }
+                    else
+                    {
+                        // if the command contains a value, extract it
+                        string argValue = args[nextIndex];
+                        arguments.Add(argName, argValue);
+                    }
+                }
+            }
+
+            return arguments;
+        }
+        public static Dictionary<string, string> ParseCommandLineArgs(IEnumerable<string> args)
+        {
+            return ParseCommandLineArgs(args.ToArray());
+        }
     }
 }
