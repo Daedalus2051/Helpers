@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Helpers
@@ -35,6 +36,7 @@ namespace Helpers
 
             return output;
         }
+
         /// <summary>
         /// Given a reference string as input, replaces all occurrences of the desired keyword with the given variable replacement.
         /// </summary>
@@ -54,6 +56,7 @@ namespace Helpers
 
             return output;
         }
+
         /// <summary>
         /// Given a reference string as input, replaces all occurrences of the desired keyword with the given variable replacement.
         /// </summary>
@@ -75,6 +78,7 @@ namespace Helpers
 
             return output;
         }
+
         /// <summary>
         /// Searches through an array of strings in order to find key value pairs of command line arguments.
         /// </summary>
@@ -116,5 +120,25 @@ namespace Helpers
         {
             return ParseCommandLineArgs(args.ToArray());
         }
+
+        //public static Dictionary<string, Dictionary<string,string>> ReadIniSettings(string filePath)
+        //{
+        //    throw new NotImplementedException();
+
+        //    if (!File.Exists(filePath)) throw new FileNotFoundException();
+        //    Dictionary<string, Dictionary<string, string>> iniSettingsCollection = new Dictionary<string, Dictionary<string, string>>();
+
+        //    var fileLines = File.ReadAllLines(filePath);
+        //    foreach (var line in fileLines)
+        //    {
+        //        string sectionName = "";
+        //        if (line.Contains('[') && line.Contains(']'))
+        //        {
+        //            sectionName = line.Replace("[", "").Replace("]", "");
+        //        }
+        //    }
+
+        //    return iniSettingsCollection;
+        //}
     }
 }
