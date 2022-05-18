@@ -1,7 +1,7 @@
 # Post build script to update package nuspec file and deploy nuget
 # Place in project root folder
 # nuget.exe must be accessible in your PATH system variable
-# Frazier nuget repo must be setup
+# Custom nuget repo must be setup
 # Place in project post build property: 
 # powershell -NoProfile -ExecutionPolicy RemoteSigned -file $(ProjectDir)postBuild.ps1 -projPath $(ProjectDir) -config "$(ConfigurationName)" -projFileName "$(ProjectFileName)" -projName "$(ProjectName)"
 
@@ -12,7 +12,7 @@ Param(
 	[string]$projName
 )
 
-# $projPath = "C:\Frazier Industrial\Helpers\Helpers\"
+# $projPath = "C:\Projects\Helpers\Helpers\"
 # $config = "Release"
 # $projFileName = "Helpers.csproj"
 # $projName = "Helpers"
@@ -53,7 +53,7 @@ $pattern = '\[assembly: AssemblyVersion\("(.*)"\)\]'
  #Creates a nupkg file
  nuget pack $projFileName -Properties Configuration=Release;
 
- #Pushes the nupkg file to the Frazier nuget source
+ #Pushes the nupkg file to the custom nuget source
  $nugetPackFilename = $projName + "." + $version + ".nupkg"
  if ([System.IO.File]::Exists("$pwd\$nugetPackFilename") -ne $true)  {
      Write-Output "Could not find file $nugetPackFilename ! Nuget build likely failed, check output for details."
