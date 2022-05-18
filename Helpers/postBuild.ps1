@@ -59,7 +59,7 @@ $pattern = '\[assembly: AssemblyVersion\("(.*)"\)\]'
      Write-Output "Could not find file $nugetPackFilename ! Nuget build likely failed, check output for details."
  }
  else {     
-     nuget push $nugetPackFilename -Source "Frazier"
+     nuget push $nugetPackFilename -Source "Custom"
  }
  
  Write-Output "Post Build Finished"
